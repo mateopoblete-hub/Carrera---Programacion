@@ -2,4 +2,6 @@
 
  Mi primer repositorio en GitHUb
 
- I love :music:, :gym:
+ I love 🎵, 💪
+
+I love 🐱, 📖
