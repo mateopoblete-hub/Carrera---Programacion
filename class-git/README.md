@@ -679,7 +679,7 @@ Estos conflictos deben resolverse manualmente antes de completar el merge.
 - **Conflicto:** Problema que ocurre al unir cambios incompatibles.
 
 
-# CLASE 6 - MIÉRCOLES 20 DE MAYO DEL 2026
+# CLASE 6 - MIÉRCOLES 20 DE MAYO DEL 2026 - Git Bash
 
 ## Volver en el tiempo en nuestro repositorio utilizando Reset y Checkout - Parte 6
 
