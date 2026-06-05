@@ -969,3 +969,621 @@ cd ..
 cd ..
 # Volvemos al directorio superior
 ```
+
+# CLASE 7 - MIÉRCOLES 27 DE MAYO DEL 2026 - Git Bash
+
+## Git Reset vs Git RM - Parte 7
+
+Los comandos `git reset` y `git rm` tienen utilidades muy diferentes, pero pueden confundirse fácilmente.
+
+---
+
+## Git Reset
+
+El comando `git reset` es una herramienta poderosa que permite deshacer o revertir cambios en un repositorio Git.
+
+Puede ejecutarse de tres maneras principales:
+
+```bash
+git reset --soft
+git reset --mixed
+git reset --hard
+```
+
+A diferencia de `git checkout`, que nos permite ir a una versión anterior, revisarla y volver, `git reset` modifica la historia del repositorio. Cuando usamos reset, estamos eliminando parte de la historia y sobrescribiéndola.
+
+> Con git checkout podemos viajar al pasado y regresar.  
+> Con git reset volvemos al pasado y reescribimos la historia.
+
+---
+
+## Los tres árboles de Git
+
+Para entender Git Reset es importante conocer las tres áreas principales de Git:
+
+### Working Directory (Área de trabajo)
+
+Es donde se encuentran los archivos que estamos editando.
+
+### Staging Area (Área de preparación)
+
+Es la zona temporal donde se preparan los cambios antes de realizar un commit.
+
+### Repository (Repositorio)
+
+Es donde Git almacena permanentemente los commits.
+
+```text
+Working Directory
+        │
+        ▼
+    git add
+        │
+        ▼
+ Staging Area
+        │
+        ▼
+   git commit
+        │
+        ▼
+   Repository
+```
+
+---
+
+## Ingresamos de la siguiente manera
+
+Abrir Git Bash en Windows o la terminal de Linux o Mac.
+
+Al abrir Git Bash hacerlo como administrador. En Linux también se puede utilizar `sudo` para permisos especiales.
+
+> TAREA: Agregar comentarios en los comandos para saber qué hace cada uno.
+
+---
+
+## Práctica de Git Reset
+
+```bash
+cd tecnicatura
+# Vamos al directorio principal de trabajo
+
+cd practicas
+# Entramos en la carpeta donde realizaremos pruebas
+
+touch reset_file.txt
+# Creamos un archivo para experimentar con Git Reset
+```
+
+Agregar información al archivo y realizar uno o dos commits.
+
+```bash
+git add reset_file.txt
+# Agregamos el archivo al área de preparación
+
+git add .
+# Agregamos todos los archivos modificados
+
+git commit -m "Iniciando el primer commit"
+# Creamos el primer commit
+```
+
+---
+
+## ¿Cómo funciona Git Reset?
+
+Git Reset permite moverse entre commits para deshacer o rehacer cambios.
+
+Git almacena cada versión del proyecto como una instantánea llamada commit.
+
+---
+
+## Variaciones de Git Reset
+
+### Git Reset Soft
+
+```bash
+git reset --soft hash
+# Regresa a un commit anterior manteniendo los cambios en staging
+```
+
+Características:
+
+- Borra commits posteriores del historial.
+- Mantiene los cambios preparados para volver a commitearlos.
+- No pierde archivos.
+
+---
+
+### Git Reset Hard
+
+```bash
+git reset --hard hash
+# Regresa completamente a un commit anterior
+```
+
+Características:
+
+- Elimina commits posteriores.
+- Elimina cambios del staging.
+- Elimina cambios del área de trabajo.
+- Es el más peligroso.
+
+---
+
+### Git Reset Mixed
+
+```bash
+git reset --mixed hash
+# Regresa a un commit anterior eliminando el staging
+```
+
+Características:
+
+- Borra los commits posteriores.
+- Quita los archivos del staging.
+- Conserva los cambios en el área de trabajo.
+
+Es el comportamiento predeterminado de Git Reset.
+
+---
+
+### Git Reset HEAD
+
+```bash
+git reset HEAD archivo.txt
+# Quita un archivo del área de preparación sin eliminar sus cambios
+```
+
+Características:
+
+- Mueve archivos de Staging a Working Directory.
+- No elimina información.
+- Permite seguir editando antes de commitear.
+
+---
+
+## ¿Qué es Git RM?
+
+Git RM permite eliminar archivos del repositorio.
+
+A diferencia de Git Reset, este comando elimina archivos que ya están siendo rastreados por Git.
+
+---
+
+## Variaciones de Git RM
+
+### Git RM Cached
+
+```bash
+git rm --cached archivo.txt
+# Elimina el archivo del repositorio pero lo conserva en el disco
+```
+
+Características:
+
+- Deja de ser rastreado por Git.
+- El archivo continúa existiendo en la computadora.
+- Pasa al estado Untracked.
+
+---
+
+### Git RM Force
+
+```bash
+git rm --force archivo.txt
+# Elimina el archivo del repositorio y del disco duro
+```
+
+Características:
+
+- Borra completamente el archivo.
+- Git deja de rastrearlo.
+- Puede recuperarse utilizando commits anteriores.
+
+---
+
+## Diferencia entre Git RM y Git Reset HEAD
+
+### Git RM
+
+```bash
+git rm archivo.txt
+```
+
+- Elimina archivos.
+- Modifica el contenido del repositorio.
+- Puede afectar el historial del proyecto.
+
+### Git Reset HEAD
+
+```bash
+git reset HEAD archivo.txt
+```
+
+- Solo quita archivos del área de preparación.
+- No elimina archivos.
+- No afecta el historial del repositorio.
+
+---
+
+## ¿Cuándo utilizar Git Reset en lugar de Git Revert?
+
+### Git Reset
+
+Se utiliza cuando:
+
+- Queremos reescribir la historia.
+- Queremos eliminar commits anteriores.
+- Estamos trabajando localmente.
+
+### Git Revert
+
+Se utiliza cuando:
+
+- Queremos deshacer cambios sin modificar la historia.
+- Trabajamos en proyectos compartidos.
+- Necesitamos mantener todos los registros de cambios.
+
+---
+
+## Resumen
+
+### Git RM
+
+```bash
+git rm archivo.txt
+```
+
+- Elimina archivos de Git.
+- Mantiene el historial anterior.
+- El archivo desaparece de la versión actual.
+
+### Git Reset HEAD
+
+```bash
+git reset HEAD archivo.txt
+```
+
+- Quita archivos del staging.
+- Mantiene los cambios.
+- No elimina archivos.
+
+---
+
+## Siguientes pasos
+
+Crear cambios en el archivo creado.
+
+Realizar varios commits para probar:
+
+```bash
+git reset --soft
+git reset --mixed
+git reset --hard
+git reset HEAD
+git rm --cached
+git rm --force
+```
+
+Al finalizar las pruebas:
+
+```bash
+cd ..
+# Volvemos al directorio anterior
+
+rm -R practicas
+# Eliminamos el directorio de pruebas junto con todo su contenido
+```
+
+# CLASE 8-A - MIÉRCOLES 3 DE JUNIO DEL 2026 - Git Bash
+
+## Flujo de trabajo básico con un repositorio remoto - Parte 8
+
+Cuando empiezas a trabajar en un entorno local, el proyecto vive únicamente en tu computadora. Esto significa que no hay forma de que otros miembros del equipo trabajen en él.
+
+Para solucionar esto, utilizamos los **servidores remotos**, un nuevo estado que deben seguir nuestros archivos para conectarse y trabajar con equipos de cualquier parte del mundo.
+
+Estos servidores remotos pueden estar alojados en:
+
+- GitHub
+- GitLab
+- BitBucket
+
+Estos servicios almacenan una copia del repositorio y nos proporcionan una URL para que cualquier integrante del equipo pueda acceder al proyecto.
+
+De esta forma, otros desarrolladores pueden:
+
+- Descargar el proyecto.
+- Realizar cambios.
+- Subir nuevamente esos cambios.
+- Comparar versiones.
+- Crear propuestas de mejora.
+
+---
+
+## Comandos para trabajo remoto con Git
+
+### Clonar un repositorio remoto
+
+```bash
+git clone url_del_servidor_remoto
+# Descarga la última versión del proyecto junto con todo el historial de cambios
+```
+
+Este comando crea automáticamente la carpeta `.git` en el repositorio descargado.
+
+---
+
+### Enviar cambios al servidor remoto
+
+```bash
+git push
+# Envía los commits realizados desde el repositorio local al repositorio remoto
+```
+
+Antes de ejecutar este comando debemos realizar:
+
+```bash
+git add .
+git commit -m "Mensaje del commit"
+```
+
+---
+
+### Obtener cambios del servidor remoto
+
+```bash
+git fetch
+# Descarga los cambios del servidor remoto sin aplicarlos automáticamente
+```
+
+Los cambios quedan almacenados localmente para que podamos revisarlos antes de integrarlos.
+
+---
+
+### Combinar cambios
+
+```bash
+git merge
+# Combina cambios de diferentes ramas o repositorios
+```
+
+También se utiliza después de un `git fetch` para incorporar los cambios descargados.
+
+---
+
+### Obtener y combinar cambios automáticamente
+
+```bash
+git pull
+# Ejecuta git fetch y git merge en un solo paso
+```
+
+Es el comando más utilizado para actualizar un repositorio local.
+
+---
+
+# Comandos útiles para proyectos grandes
+
+### Historial resumido
+
+```bash
+git log --oneline
+# Muestra el hash corto y el mensaje de cada commit
+```
+
+---
+
+### Mostrar referencias de ramas y etiquetas
+
+```bash
+git log --decorate
+# Indica dónde se encuentra el HEAD y otras referencias
+```
+
+---
+
+### Ver estadísticas de cambios
+
+```bash
+git log --stat
+# Muestra los archivos modificados y la cantidad de líneas agregadas o eliminadas
+```
+
+---
+
+### Ver cambios detallados
+
+```bash
+git log -p
+# Muestra exactamente qué cambió dentro de cada commit
+```
+
+---
+
+### Ver commits por usuario
+
+```bash
+git shortlog
+# Agrupa los commits por autor
+```
+
+---
+
+### Visualizar gráficamente las ramas
+
+```bash
+git log --graph --oneline --decorate --all
+# Muestra un gráfico del historial de ramas y commits
+```
+
+---
+
+### Limitar la cantidad de commits mostrados
+
+```bash
+git log -3
+# Muestra solamente los últimos 3 commits
+```
+
+---
+
+### Buscar commits por fecha
+
+```bash
+git log --after="2018-1-2"
+# Muestra commits posteriores a la fecha indicada
+```
+
+```bash
+git log --after="today"
+# Muestra commits realizados desde hoy
+```
+
+```bash
+git log --after="2018-1-2" --before="today"
+# Muestra commits entre dos fechas específicas
+```
+
+---
+
+### Buscar commits por autor
+
+```bash
+git log --author="Nombre Autor"
+# Muestra commits realizados por un autor específico
+```
+
+---
+
+### Buscar commits por mensaje
+
+```bash
+git log --grep="INVIE"
+# Busca commits cuyo mensaje contenga exactamente ese texto
+```
+
+```bash
+git log --grep="INVIE" -i
+# Busca ignorando mayúsculas y minúsculas
+```
+
+---
+
+### Buscar commits de un archivo específico
+
+```bash
+git log -- index.html
+# Muestra el historial de commits de un archivo determinado
+```
+
+---
+
+### Buscar commits por contenido
+
+```bash
+git log -S "Por contenido"
+# Busca commits donde aparezca o desaparezca un texto específico
+```
+
+---
+
+### Guardar el historial en un archivo
+
+```bash
+git log > log.txt
+# Guarda todo el historial de commits en un archivo de texto
+```
+
+---
+
+## Resumen
+
+### Trabajo Local
+
+```text
+Working Directory
+        │
+        ▼
+     git add
+        │
+        ▼
+     Staging
+        │
+        ▼
+    git commit
+        │
+        ▼
+Repositorio Local
+```
+
+### Trabajo Remoto
+
+```text
+Repositorio Local
+        │
+        ▼
+     git push
+        │
+        ▼
+Repositorio Remoto
+(GitHub, GitLab, BitBucket)
+        │
+        ▼
+     git pull
+        │
+        ▼
+Repositorio Local
+```
+
+El flujo básico de trabajo remoto consiste en:
+
+1. Clonar el repositorio.
+2. Realizar cambios.
+3. Hacer `git add`.
+4. Hacer `git commit`.
+5. Ejecutar `git push`.
+6. Actualizar el proyecto con `git pull`.
+
+#Miercoles 3 de Junio (Parte 2)
+## Flujo de trabajo básico con repositorios remotos
+
+Cuando trabajamos únicamente en nuestra computadora, el proyecto existe de forma local. Para compartirlo con otras personas utilizamos repositorios remotos en plataformas como GitHub, GitLab o BitBucket.
+
+Los repositorios remotos permiten descargar proyectos, realizar cambios y compartirlos con otros desarrolladores.
+
+### Comandos básicos para trabajo remoto
+
+```bash
+git clone url_del_repositorio
+# Descarga un repositorio remoto junto con su historial
+
+git push
+# Envía los cambios del repositorio local al repositorio remoto
+
+git fetch
+# Descarga actualizaciones del servidor remoto sin aplicarlas
+
+git merge
+# Fusiona cambios entre ramas o repositorios
+
+git pull
+# Ejecuta git fetch y git merge automáticamente
+```
+
+### Comandos útiles para consultar el historial
+
+```bash
+git log --oneline
+# Muestra los commits de forma resumida
+
+git log --stat
+# Muestra estadísticas de cambios
+
+git log --graph --oneline --decorate --all
+# Muestra gráficamente las ramas y commits
+
+git shortlog
+# Agrupa commits por autor
+```
+
