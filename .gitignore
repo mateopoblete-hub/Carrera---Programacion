@@ -1,24 +1,14 @@
-/Java/Leccion1/HolaMundo/nbproject/private/
-/Java/Leccion1/HolaMundo/build/
-/Java/Leccion1/Libros/build/
-/Java/Leccion1/Libros/nbproject/private/
-/Java/Leccion1/Ejercicio_1/nbproject/private/
-/Java/Leccion1/Ejercicio_2/nbproject/private/
-/Java/Leccion1/Ejercicio_2/build/
-/Java/Leccion1/Ejercicio_3/nbproject/private/
-/Java/Leccion1/Ejercicio_3/build/
-/Java/Leccion1/Ejercicio_4/nbproject/private/
-/Java/Leccion1/Ejercicio_4/build/
-/Java/Leccion1/Ejercicio_5/nbproject/private/
-/Java/Leccion1/Ejercicio_6/nbproject/private/
-/Java/Leccion1/Ejercicio_7/nbproject/private/
-/Java/Leccion1/Ejercicio_7/build/
-/Java/Leccion2/Leccion_2/nbproject/private/
-/Java/Leccion2/CondicionalEjercicio_1/nbproject/private/
-/Java/Leccion2/CondicionalEjercicio_1/build/
-/Java/Leccion2/Leccion_2/build/
-/Java/Leccion2/CondicionalEjercicio_2/nbproject/private/
-/Java/Leccion2/CondicionalEjercicio_3/nbproject/private/
-/Java/Leccion2/EjerciciosGrupales/nbproject/private/
-/Java/Grupal/EjerciciosGrupales/nbproject/private/
-/Java/Grupal/EjerciciosGrupales/build/
+# Java IDE / NetBeans / IntelliJ
+nbproject/
+build/
+dist/
+*.class
+*.mf
+
+# IDEs
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
